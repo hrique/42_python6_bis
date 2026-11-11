@@ -23,24 +23,22 @@ class NormalStrategy(BattleStrategy):
     name = "Normal"
 
     def is_valid(self, creature: Creature) -> bool:
-        # TODO: serve para qualquer criatura
-        return False
+        return isinstance(creature, Creature)
 
     def act(self, creature: Creature) -> None:
-        # TODO: imprimir o attack da criatura
-        pass
+        print(creature.attack())
 
 
 class AggressiveStrategy(BattleStrategy):
     name = "Aggressive"
 
     def is_valid(self, creature: Creature) -> bool:
-        # TODO: só serve para quem tem TransformCapability (isinstance)
-        return False
+        return isinstance(creature, TransformCapability)
 
     def act(self, creature: Creature) -> None:
         if not isinstance(creature, TransformCapability):
-            # TODO: raise InvalidStrategyError com a mensagem
-            #   Invalid Creature '<nome>' for this aggressive strategy
-            return
-        # TODO: imprimir transform, attack, revert
+            raise InvalidStrategyError(f"Invalid Creature '{creature.name}'"
+                                       " for this aggressive strategy")
+        print(creature.transform())
+        print(creature.attack())
+        print(creature.revert())

@@ -21,9 +21,13 @@ def battle(opponents: list[Opponent]) -> None:
             for j in range(i + 1, len(fighters)):
                 c1, s1 = fighters[i]
                 c2, s2 = fighters[j]
-                # TODO: "\n* Battle *", describe de c1, " vs.",
-                #       describe de c2, " now fight!",
-                #       e a estratégia de cada um agindo (act)
+                print("\n* Battle *")
+                print(c1.describe())
+                print(" vs.")
+                print(c2.describe())
+                print(" now fight!")
+                s1.act(c1)
+                s2.act(c2)
     except InvalidStrategyError as e:
         print(f"Battle error, aborting tournament: {e}")
 
@@ -38,8 +42,9 @@ def main() -> None:
     show_opponents("Tournament 0 (basic)", t0)
     battle(t0)
     print()
-    # TODO: "Tournament 1 (error)" com
-    #       [(transform, aggressive), (flame, aggressive)]
+    t1: list[Opponent] = [(transform, aggressive), (flame, aggressive)]
+    show_opponents("Tournament 1 (error)", t1)
+    battle(t1)
 
 
 if __name__ == "__main__":
